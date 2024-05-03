@@ -9,6 +9,7 @@ camera.position.set(0, 10, 0);
 
 const renderer = new THREE.WebGLRenderer({
   canvas: document.querySelector('#bg'),
+  alpha: true
 });
 
 renderer.setPixelRatio(window.devicePixelRatio);
