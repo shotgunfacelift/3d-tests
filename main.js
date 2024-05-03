@@ -64,3 +64,33 @@ c4Loader.load( './assets/c4.obj', ( c4 ) => {
   }
   animate()
 } )
+
+//EXPERIMENTAL HOVER FEATURE
+
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2(-1, -1);
+
+function onMouseMove(event) {
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+}
+
+document.addEventListener('mousemove', onMouseMove, false);
+
+function render() {
+  requestAnimationFrame(render);
+  raycaster.setFromCamera(mouse, camera);
+
+  const intersects = raycaster.intersectObjects(scene.children);
+
+  if (intersects.length > 0) {
+    intersects[0].object.material.color.set(0x48ff0e);
+  }
+  else {
+    material.color.set(0xff380e);
+  }
+
+  renderer.render(scene, camera);
+}
+
+render();
