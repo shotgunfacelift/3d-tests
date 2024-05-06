@@ -5,7 +5,7 @@ import {OBJLoader} from 'three/addons/loaders/OBJLoader.js';
 const scene = new THREE.Scene();
 
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-camera.position.set(0, 10, 0);
+camera.position.set(0, 17, 40);
 
 const renderer = new THREE.WebGLRenderer({
   canvas: document.querySelector('#bg'),
@@ -14,7 +14,7 @@ const renderer = new THREE.WebGLRenderer({
 
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
-camera.position.setZ(30);
+// camera.position.setZ(30);
 
 renderer.render(scene, camera);
 
@@ -28,7 +28,7 @@ s2kLoader.load( './assets/s2k.obj', ( s2k ) => {
         }
     })
 
-      s2k.translateX(-15)
+      s2k.translateX(-30)
       s2k.translateY(10)
 
 			scene.add( s2k );
@@ -50,7 +50,7 @@ c4Loader.load( './assets/c4.obj', ( c4 ) => {
         child.material = material;
     }
 })
-      c4.translateX(17)
+      c4.translateX(0)
       c4.translateY(10)
 
   scene.add( c4 );
@@ -59,6 +59,28 @@ c4Loader.load( './assets/c4.obj', ( c4 ) => {
     requestAnimationFrame(animate);
   
     c4.rotation.y -= 0.01;
+  
+    renderer.render(scene, camera);
+  }
+  animate()
+} )
+
+const nissanLoader = new OBJLoader();
+nissanLoader.load( './assets/nissan.obj', ( nissan ) => {
+  nissan.traverse( child => {
+    if (child.isMesh){
+        child.material = material;
+    }
+})
+      nissan.translateX(30)
+      nissan.translateY(10)
+
+  scene.add( nissan );
+
+  function animate() {
+    requestAnimationFrame(animate);
+  
+    nissan.rotation.y -= 0.01;
   
     renderer.render(scene, camera);
   }
